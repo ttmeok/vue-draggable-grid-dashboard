@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Vue 3 拖拽网格仪表板组件 - 支持拖拽、缩放、新建、删除等功能" />
+    <title>Vue Draggable Grid Dashboard - Demo</title>
+    <script type="module" crossorigin src="./vue-draggable-grid-dashboard.es.js"></script>
+    <link rel="stylesheet" crossorigin href="./vue-draggable-grid-dashboard.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      // 这里需要引入Vue和组件
+      import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+      import { DraggableGrid } from './vue-draggable-grid-dashboard.es.js'
+      
+      // 创建应用
+      const app = createApp({
+        template: `
+          <div class="app-container">
+            <div class="toolbar">
+              <div class="toolbar-left">
+                <h1>📱 拖拽网格组件 Demo</h1>
+                <p>支持拖拽、缩放、新建、删除等功能</p>
+              </div>
+            </div>
+            
+            <div class="grid-container">
+              <DraggableGrid 
+                v-model="items" 
+                :grid-x-count="12" 
+                :grid-y-count="9" 
+                :grid-gap="10"
+                @add="onAdd"
+                @change="onChange"
+              >
+                <template #card="{ item, index }">
+                  <div class="card">
+                    <h3>卡片 {{ index + 1 }}</h3>
+                    <p>内容: {{ item.id }}</p>
+                    <p>尺寸: {{ item.size.width }}×{{ item.size.height }}</p>
+                    <p>位置: {{ item.position.gridX }}, {{ item.position.gridY }}</p>
+                  </div>
+                </template>
+              </DraggableGrid>
+            </div>
+          </div>
+        `,
+        data() {
+          return {
+            items: [
+              { id: '1', size: { width: 3, height: 3 }, position: { gridX: 0, gridY: 0 } },
+              { id: '2', size: { width: 3, height: 2 }, position: { gridX: 3, gridY: 0 } }
+            ]
+          }
+        },
+        methods: {
+          onAdd() {
+            const id = Math.random().toString(36).slice(2, 8)
+            this.items.push({ 
+              id, 
+              size: { width: 3, height: 3 }, 
+              position: { gridX: 0, gridY: 0 } 
+            })
+          },
+          onChange(item, index) {
+            console.log('卡片变化:', item, index)
+          }
+        }
+      })
+      
+      app.component('DraggableGrid', DraggableGrid)
+      app.mount('#app')
+    </script>
+    
+    <style>
+      .app-container { 
+        width: 100%; 
+        height: 100vh; 
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      
+      .toolbar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 16px 24px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        flex-shrink: 0;
+      }
+      
+      .toolbar-left h1 {
+        margin: 0 0 4px 0;
+        font-size: 24px;
+        color: #333;
+      }
+      
+      .toolbar-left p {
+        margin: 0;
+        color: #666;
+        font-size: 14px;
+      }
+      
+      .grid-container {
+        flex: 1;
+        padding: 20px;
+        overflow: auto;
+      }
+      
+      .card { 
+        width: 100%; 
+        height: 100%; 
+        border-radius: 12px; 
+        border: 3px solid #46B9B9;
+        padding: 16px; 
+        box-sizing: border-box; 
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+      }
+      
+      .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      }
+      
+      .card h3 {
+        margin: 0 0 8px 0;
+        color: #333;
+        font-size: 16px;
+      }
+      
+      .card p {
+        margin: 4px 0;
+        color: #666;
+        font-size: 12px;
+      }
+    </style>
+  </body>
+</html>
