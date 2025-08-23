@@ -5,8 +5,9 @@
   "type": "module",
   "description": "A powerful Vue 3 draggable grid dashboard component with drag, resize, add, delete functionality",
   "keywords": ["vue", "vue3", "draggable", "grid", "dashboard", "component", "typescript"],
-  "author": "Your Name",
+  "author": "ttmeok",
   "license": "MIT",
+  "homepage": "https://ttmeok.github.io/vue-draggable-grid-dashboard",
   "main": "dist/vue-draggable-grid-dashboard.umd.js",
   "module": "dist/vue-draggable-grid-dashboard.es.js",
   "types": "dist/index.d.ts",
@@ -23,6 +24,7 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run type:build && vite build",
+    "build:demo": "vite build --config vite.demo.config.ts",
     "type:build": "vue-tsc --project tsconfig.build.json",
     "preview": "vite preview"
   },
