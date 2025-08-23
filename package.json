@@ -1,10 +1,18 @@
 {
   "name": "vue-draggable-grid-dashboard",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "A powerful Vue 3 draggable grid dashboard component with drag, resize, add, delete functionality",
-  "keywords": ["vue", "vue3", "draggable", "grid", "dashboard", "component", "typescript"],
+  "keywords": [
+    "vue",
+    "vue3",
+    "draggable",
+    "grid",
+    "dashboard",
+    "component",
+    "typescript"
+  ],
   "author": "Your Name",
   "license": "MIT",
   "homepage": "https://ttmeok.github.io/vue-draggable-grid-dashboard",
