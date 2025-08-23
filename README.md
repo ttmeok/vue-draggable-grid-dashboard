@@ -6,6 +6,14 @@
 
 **[🚀 在线演示页面](https://ttmeok.github.io/vue-draggable-grid-dashboard)**
 
+## 📸 功能截图
+
+> **注意**: 请先运行 `npm run dev` 启动开发服务器，然后访问 `http://localhost:5173` 查看demo页面并截图
+
+![Demo Screenshot](./docs/demo-screenshot.png)
+
+*功能丰富的拖拽网格仪表板演示页面*
+
 ## ✨ 特性
 
 - 🖱️ **拖拽功能**：支持卡片拖拽改变位置
