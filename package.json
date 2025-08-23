@@ -1,7 +1,7 @@
 {
   "name": "vue-draggable-grid-dashboard",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "A powerful Vue 3 draggable grid dashboard component with drag, resize, add, delete functionality",
   "keywords": [
