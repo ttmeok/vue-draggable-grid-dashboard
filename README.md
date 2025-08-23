@@ -6,10 +6,6 @@
 
 **[🚀 在线演示页面](https://ttmeok.github.io/vue-draggable-grid-dashboard)**
 
-## 📸 功能截图
-
-![Demo Screenshot](./docs/demo-screenshot.png)
-
 ## ✨ 特性
 
 - 🖱️ **拖拽功能**：支持卡片拖拽改变位置
