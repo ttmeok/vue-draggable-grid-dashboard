@@ -6,15 +6,9 @@ export default defineConfig({
   base: '/vue-draggable-grid-dashboard/',
   plugins: [vue()],
   build: {
-    outDir: 'dist',
+    outDir: 'docs',
     rollupOptions: {
-      input: {
-        main: 'index.html'
-      }
+      input: 'demo.html'
     }
-  },
-  server: {
-    port: 5173,
-    open: true
   }
 })
