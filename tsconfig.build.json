@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "strict": true,
+    "module": "ESNext",
+    "target": "ES2020",
+    "moduleResolution": "node"
+  },
+  "include": ["src/lib/**/*", "src/index.ts"],
+  "exclude": ["src/App.vue", "src/style.css", "src/main.ts"]
+}
+
+
