@@ -15,7 +15,7 @@
   ],
   "author": "Your Name",
   "license": "MIT",
-  "homepage": "https://github.com/ttmeok/vue-draggable-grid-dashboard",
+  "homepage": "https://ttmeok.github.io/vue-draggable-grid-dashboard/",
   "main": "dist/vue-draggable-grid-dashboard.umd.js",
   "module": "dist/vue-draggable-grid-dashboard.es.js",
   "types": "dist/index.d.ts",
