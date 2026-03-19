@@ -4,38 +4,25 @@
     <!-- <div class="dg-debug" style="position: absolute; top: 5px; right: 5px; background: rgba(0,0,0,0.7); color: white; padding: 5px; font-size: 12px; z-index: 1000;">
       Grid: {{ gridWidth }}x{{ gridHeight }} | Items: {{ items.length }} | Container: {{ container?.offsetWidth }}x{{ container?.offsetHeight }}
     </div> -->
-    
+
     <div class="dg-grid" :style="{ gap: gridGap + 'px' }">
       <!-- 背景网格 - 只在拖拽或调整大小时显示 -->
-      <div
-        v-for="n in gridXCount * gridYCount"
-        :key="n"
-        class="dg-cell"
-        :class="{ 'dg-cell-visible': isDragging.state || isResizing.state }"
-        :style="{
+      <div v-for="n in gridXCount * gridYCount" :key="n" class="dg-cell"
+        :class="{ 'dg-cell-visible': isDragging.state || isResizing.state }" :style="{
           flex: `0 0 ${gridWidth}px`,
           height: `${gridHeight}px`
-        }"
-      ></div>
+        }"></div>
 
-      <div
-        v-for="(item, index) in items"
-        :key="item.id"
-        class="dg-item"
-        :id="'dg_' + item.id"
-        :style="{
-          width: `${item.size.width * gridWidth + (item.size.width - 1) * gridGap}px`,
-          height: `${item.size.height * gridHeight + (item.size.height - 1) * gridGap}px`,
-          left: item.position.gridX * (gridWidth + gridGap) + 'px',
-          top: item.position.gridY * (gridHeight + gridGap) + 'px',
-          zIndex: isDragging.index === index || isResizing.index === index ? 3 : 2
-        }"
-        :class="{
+      <div v-for="(item, index) in items" :key="item.id" class="dg-item" :id="'dg_' + item.id" :style="{
+        width: `${item.size.width * gridWidth + (item.size.width - 1) * gridGap}px`,
+        height: `${item.size.height * gridHeight + (item.size.height - 1) * gridGap}px`,
+        left: item.position.gridX * (gridWidth + gridGap) + 'px',
+        top: item.position.gridY * (gridHeight + gridGap) + 'px',
+        zIndex: isDragging.index === index || isResizing.index === index ? 3 : 2
+      }" :class="{
           isResizing: isResizing.index === index,
           isDragging: isDragging.index === index
-        }"
-        @mousedown.stop="(event) => startDrag(event, item, index)"
-      >
+        }" @mousedown.stop="(event) => startDrag(event, item, index)">
         <div class="dg-move-icon"></div>
         <div class="dg-resizer" @mousedown.stop="(event) => startResize(event, item, index)"></div>
         <div class="dg-card" @mousedown.stop>
@@ -94,17 +81,17 @@ const gridInit = () => {
   if (!container.value) return
   const containerWidth = container.value.offsetWidth - 32
   const containerHeight = container.value.offsetHeight - 32
-  
+
   if (containerWidth <= 0 || containerHeight <= 0) {
     // 如果容器尺寸还没准备好，延迟重试
     setTimeout(gridInit, 100)
     return
   }
-  
+
   // 计算网格尺寸，确保能容纳指定数量的网格
   const availableWidth = containerWidth - (gridXCount.value - 1) * gridGap.value
   const availableHeight = containerHeight - (gridYCount.value - 1) * gridGap.value
-  
+
   gridWidth.value = Math.max(60, Math.floor(availableWidth / gridXCount.value))
   gridHeight.value = Math.max(60, Math.floor(availableHeight / gridYCount.value))
 
@@ -317,6 +304,7 @@ onBeforeUnmount(() => {
   box-sizing: border-box;
   background-color: #f5f5f5;
 }
+
 .dg-grid {
   position: relative;
   display: flex;
@@ -327,6 +315,7 @@ onBeforeUnmount(() => {
   overflow: visible;
   gap: 10px;
 }
+
 .dg-cell {
   display: flex;
   align-items: center;
@@ -356,8 +345,9 @@ onBeforeUnmount(() => {
   padding: 12px;
   box-sizing: border-box;
   transition: top 0.2s, left 0.2s, width 0.2s, height 0.2s, border 0.5s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
 .dg-item .dg-resizer {
   display: none;
   position: absolute;
@@ -372,6 +362,7 @@ onBeforeUnmount(() => {
   cursor: se-resize;
   z-index: 5;
 }
+
 .dg-item .dg-move-icon {
   display: none;
   position: absolute;
@@ -381,15 +372,53 @@ onBeforeUnmount(() => {
   cursor: move;
   z-index: 2;
 }
-.dg-item.cloned { transition: none; pointer-events: none; z-index: 1000 !important; }
-.dg-item.isDragging { border-color: rgba(0,0,0,0.1) !important; background-color: rgba(0,0,0,0.1); }
-.dg-item.isDragging * { visibility: hidden; }
-.dg-item:hover:not(.isDragging), .dg-item.isResizing { border-color: #46b9b9; }
-.dg-item:hover:not(.isDragging) .dg-resizer, .dg-item.isResizing .dg-resizer { display: block; }
-.dg-card { width: 100%; height: 100%; }
-.dg-actions { position: absolute; bottom: 12px; left: 16px; }
-.dg-btn { padding: 6px 10px; border-radius: 6px; border: 1px solid #46b9b9; color: #46b9b9; background: #fff; cursor: pointer; }
-.dg-btn:hover { background: #e8f6f6; }
+
+.dg-item.cloned {
+  transition: none;
+  pointer-events: none;
+  z-index: 1000 !important;
+}
+
+.dg-item.isDragging {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dg-item.isDragging * {
+  visibility: hidden;
+}
+
+.dg-item:hover:not(.isDragging),
+.dg-item.isResizing {
+  border-color: #46b9b9;
+}
+
+.dg-item:hover:not(.isDragging) .dg-resizer,
+.dg-item.isResizing .dg-resizer {
+  display: block;
+}
+
+.dg-card {
+  width: 100%;
+  height: 100%;
+}
+
+.dg-actions {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+}
+
+.dg-btn {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #46b9b9;
+  color: #46b9b9;
+  background: #fff;
+  cursor: pointer;
+}
+
+.dg-btn:hover {
+  background: #e8f6f6;
+}
 </style>
-
-
